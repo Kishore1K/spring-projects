@@ -54,5 +54,9 @@
 	<bean class="org.springframework.orm.hibernate5.HibernateTemplate" name="hibernateTemplate">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+	
+	<bean class="org.springframework.orm.hibernate5.HibernateTransactionManager" name="transactionManager" >
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
     
 </beans>
