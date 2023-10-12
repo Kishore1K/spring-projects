@@ -25,15 +25,16 @@
 				  </thead>
 				  <tbody>
 				  
-					  <c:forEach items="${products}" var="s">
+					  <c:forEach items="${products}" var="s" varStatus="loop">
+					  
 					  	<tr>
-					      <th scope="row">${s.id }</th>
+					      <th scope="row">${loop.count }</th>
 					      <td>${s.name }</td>
 					      <td>${s.description }</td>
 					      <td>${s.price }</td>
 					      <td><a href="delete/${s.id}" ><i class="fas fa-trash fa-2x text-danger"></i></a>
 					      &nbsp;&nbsp;&nbsp;&nbsp;
-					      <a href="update"><i class="fa-solid fa-file-pen  fa-2x"> </i></a>
+					      <a href="update/${s.id }"><i class="fa-solid fa-file-pen  fa-2x"> </i></a>
 					      </td>
 					    </tr>
 				  

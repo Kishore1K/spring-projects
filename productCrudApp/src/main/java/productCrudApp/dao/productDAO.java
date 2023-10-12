@@ -26,12 +26,16 @@ public class productDAO {
 	}
 
 	public Product getProductById(int id) {
-		return this.hibernateTemplate.get(Product.class, id)
+		return this.hibernateTemplate.get(Product.class, id);
 	}
 	
 	@Transactional
 	public void deleteProduct(int id) {
 		Product product = this.hibernateTemplate.load(Product.class, id);
 		this.hibernateTemplate.delete(product);
+	}
+	@Transactional
+	public void updateProduct(Product product) {
+		 this.hibernateTemplate.update(product);
 	}
 }

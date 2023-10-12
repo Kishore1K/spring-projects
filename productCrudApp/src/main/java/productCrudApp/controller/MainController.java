@@ -55,5 +55,21 @@ public class MainController {
 		return redirectView;
 		
 	}
+	@RequestMapping("/update/{id}")
+	public String updateProduct(@PathVariable("id") int id, Model m) {
+		Product product = this.prodDAO.getProductById(id);
+		m.addAttribute("product", product);
+		return "update_prod_form";
+	}
 
+	@RequestMapping(path = "/handleUpdate", method = RequestMethod.POST)
+	public RedirectView handleUpdate(@ModelAttribute Product product, HttpServletRequest req) {
+		System.out.println("Upday");
+		System.out.println(product);
+		this.prodDAO.updateProduct(product);
+		RedirectView redirectView = new RedirectView();
+		redirectView.setUrl(req.getContextPath()+"/");
+		return redirectView;
+		
+	}
 }
