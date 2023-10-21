@@ -1,3 +1,4 @@
+<%@page import="org.hibernate.query.Query"%>
 <%@page import="com.entites.Note"%>
 <%@page import="java.util.List"%>
 <%@page import="com.helper.FactoryProvider"%>
@@ -13,36 +14,30 @@
 <body>
 <div class="container">
 	<%@include file="navbar.jsp" %>
-	
+	<div class="col-12">
 	<%
 		Session session2 = FactoryProvider.getFactory().openSession();
-	
-		List<Note> noteList = session2.createCriteria(Note.class).list();
-		
+		Query query = session2.createQuery("from Note");
+		List<Note> noteList = query.list();
 	%>
-		<table class="table">
-		  <thead>
-		    <tr>
-		      <th scope="col">N.No</th>
-		      <th scope="col">title</th>
-		      <th scope="col">Note</th>
-		      <th scope="col">Date</th>
-		    </tr>
-		  </thead>
-		  <tbody>
 		  <%for(Note notes : noteList) {%>
 
-			    <tr>
-			      <th scope="row"><%=notes.getId()%></th>
-			      <td><%=notes.getTitle() %></td>
-			      <td><%=notes.getContent() %></td>
-			      <td><%=notes.getAddedDate() %></td>
-			    </tr>
-			 	<%}%>
-			   </tbody>
-			  
-		 </table>
-		 <%session2.close();%>
+			<div class="card">
+			  <div class="card-body">
+			    <img src="imgs/note.png" style="max-width:100px;"class="card-img-top m-4" alt="...">
+			    <h5 class="card-title px-5"><%=notes.getTitle() %></h5>
+			    <p class="card-text"><%=notes.getContent() %></p>
+				<div class="container text-center">
+				<a href="DeleteServlet?id=<%=notes.getId() %>" class="btn btn-danger">Delete</a>
+			    <a href="#" class="btn btn-primary">Update</a>
+				</div>
+			    
+			    
+			  </div>
+			</div>
+			<%}%>
+		<%session2.close();%>
+	</div>
 		  
 		
 
