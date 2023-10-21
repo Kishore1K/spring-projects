@@ -1,3 +1,4 @@
+<%@page import="javax.xml.crypto.NodeSetData"%>
 <%@page import="org.hibernate.query.Query"%>
 <%@page import="com.entites.Note"%>
 <%@page import="java.util.List"%>
@@ -29,7 +30,7 @@
 			    <p class="card-text"><%=notes.getContent() %></p>
 				<div class="container text-center">
 				<a href="DeleteServlet?id=<%=notes.getId() %>" class="btn btn-danger">Delete</a>
-			    <a href="#" class="btn btn-primary">Update</a>
+			    <a href="edit.jsp?id=<%=notes.getId() %>" class="btn btn-primary">Update</a>
 				</div>
 			    
 			    
