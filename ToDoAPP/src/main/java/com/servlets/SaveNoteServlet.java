@@ -35,16 +35,10 @@ public class SaveNoteServlet extends HttpServlet {
 			Note note = new Note(title, content, new Date());
 			System.out.println(note);
 			Session session = FactoryProvider.getFactory().openSession();
-			session.save(note);
 			Transaction tx = session.beginTransaction();
+			session.save(note);
 			tx.commit();
-			System.out.println("------------------");
-			System.out.println(session.createCriteria(Note.class).list());
-			System.out.println("------------------");
 
-//			ModelAndView modelAndView = new ModelAndView();
-//			modelAndView.addObject("msg", "Data Added Successfully");
-//			modelAndView.setViewName("add_note");
 			response.setContentType("text/html");
 			PrintWriter writer = response.getWriter();
 			writer.println("<h1 style='text-align:center;'>Notes Added SuccessFully</h1>");
