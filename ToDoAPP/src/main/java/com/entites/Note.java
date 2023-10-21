@@ -1,6 +1,6 @@
 package com.entites;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.Random;
 
 import javax.persistence.Entity;
