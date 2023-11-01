@@ -29,6 +29,18 @@ public class Contact {
     public Contact() {
     }
 
+    public Contact( String name, String secondName, String work, String email, String phone, String image, String description, User user) {
+
+        this.name = name;
+        this.secondName = secondName;
+        this.work = work;
+        this.email = email;
+        this.phone = phone;
+        this.image = image;
+        this.description = description;
+        this.user = user;
+    }
+
     public Long getcId() {
         return cId;
     }

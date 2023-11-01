@@ -11,7 +11,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long id;
     private  String name;
-    @Column(unique = true, nullable = false)
+    @Column(unique = true)
     private  String email;
     private  String password;
     private  String role;
@@ -27,6 +27,16 @@ public class User {
 
 
     public User() {
+    }
+
+    public User( String name, String email, String password, String role, boolean enabled, String imgUrl, String about) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+        this.enabled = enabled;
+        this.imgUrl = imgUrl;
+        this.about = about;
     }
 
     public Long getId() {
@@ -99,5 +109,20 @@ public class User {
 
     public void setContacts(List<Contact> contacts) {
         this.contacts = contacts;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
+                ", enabled=" + enabled +
+                ", imgUrl='" + imgUrl + '\'' +
+                ", about='" + about + '\'' +
+                ", contacts=" + contacts +
+                '}';
     }
 }
