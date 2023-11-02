@@ -63,7 +63,7 @@ public class MainController {
         }catch (Exception e){
             e.printStackTrace();
             m.addAttribute("user",user);
-            session.setAttribute("message",new Message(e.getMessage(), "alert-error"));
+            session.setAttribute("message",new Message(e.getMessage(), "alert-danger"));
             return  "signup";
         }
         if(!agreement){
