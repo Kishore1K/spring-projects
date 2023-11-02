@@ -29,6 +29,7 @@ public class MainController {
     @GetMapping("/signup")
     public  String signUp(Model m){
         m.addAttribute("title", "Register - Contact manager ");
+        m.addAttribute("user", new User());
         return "signup";
     }
 
