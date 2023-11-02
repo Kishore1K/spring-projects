@@ -6,8 +6,61 @@
 </head>
 <body>
 <section>
-    <h1>SignUp Page</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="my-card mt-3    ">
+                    <h1 class="text-center">Register Here</h1>
 
+                    <form th:action="@{/register}" method="post">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control"
+                                   id="name"
+                                   name="name"
+                                   aria-describedby="name"
+                                   placeholder="Enter Here" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email address</label>
+                            <input type="text" class="form-control"
+                                   id="email"
+                                   name="email"
+                                   aria-describedby="email"
+                                   placeholder="Enter email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password"
+                                   class="form-control" id="password"
+                                   name="password" placeholder="Password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="about">About</label>
+                            <textarea name="about" id="about" class="form-control" cols="30" rows="5">
+
+                            </textarea>
+                        </div>
+                        <div class="form-check text-center">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
+                            <label class="form-check-label" for="exampleCheck1">Terms and Conditions</label>
+                        </div>
+                        <br/>
+                        <div class="text-center">
+
+                            <button type="submit"  class="btn btn-primary text-center">Submit</button>
+                            <button type="reset" class="btn btn-warning text-center">Reset</button>
+
+                        </div>
+
+
+                    </form>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
 </section>
 
 </body>
