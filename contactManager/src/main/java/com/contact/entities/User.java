@@ -20,7 +20,7 @@ public class User {
     @Size(min = 5, max = 15,message = "User Name should be between 5-15 Characters")
     private  String name;
     @Column(unique = true)
-    @Pattern(regexp = "^[a-zA-Z0-9.]+@kishore.(com, in, org)$")
+    @Pattern(regexp = "^[a-zA-Z0-9.]+@kishore.com$", message = "user@kishore.com")
     private  String email;
     private  String password;
 

@@ -43,7 +43,7 @@ public class MainController {
     }
 
     @PostMapping("/register")
-    public  String registerHandler(@Valid  @ModelAttribute User user, @RequestParam(value = "agreement", defaultValue = "false") boolean agreement, Model m, HttpSession session, BindingResult result){
+    public  String registerHandler(@Valid  @ModelAttribute User user, BindingResult result, @RequestParam(value = "agreement", defaultValue = "false") boolean agreement, Model m, HttpSession session){
 
 
 
@@ -52,7 +52,6 @@ public class MainController {
         user.setEnabled(true);
         user.setImgUrl("default.png");
         System.out.println("user = " + user);
-        System.out.println("Agreement"+agreement);
         try{
             if(!agreement){
                 System.out.println("Agree For Terms and Conditions First Then You Can Submit.");
