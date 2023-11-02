@@ -2,6 +2,7 @@ package com.contact.controller;
 
 import com.contact.entities.Contact;
 import com.contact.entities.User;
+import com.contact.helper.Message;
 import com.contact.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -39,7 +41,8 @@ public class MainController {
     }
 
     @PostMapping("/register")
-    public  String registerHandler(@ModelAttribute User user, @RequestParam(value = "agreement", defaultValue = "false") boolean agreement, Model m){
+    public  String registerHandler(@ModelAttribute User user, @RequestParam(value = "agreement", defaultValue = "false") boolean agreement, Model m, HttpSession session){
+
 
 
         user.setRole("ROLE_USER");
@@ -47,13 +50,27 @@ public class MainController {
         user.setImgUrl("default.png");
         System.out.println("user = " + user);
         System.out.println("Agreement"+agreement);
+        try{
+            if(!agreement){
+                System.out.println("Agree For Terms and Conditions First Then You Can Submit.");
+                throw  new Exception("Agree For Terms and Conditions");
+            }
 
+            User res = this.userRepository.save(user);
+            m.addAttribute("user", new User());
+            session.setAttribute("message", new Message("Successfully Registered", "alert-success"));
+
+        }catch (Exception e){
+            e.printStackTrace();
+            m.addAttribute("user",user);
+            session.setAttribute("message",new Message(e.getMessage(), "alert-error"));
+            return  "signup";
+        }
         if(!agreement){
             System.out.println("Check the Terms and Conditions");
             m.addAttribute("user", user);
             return  "signup";
         }else{
-            this.userRepository.save(user);
         }
         return "signup";
 
