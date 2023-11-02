@@ -1,6 +1,11 @@
 package com.contact.entities;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.*;
+import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,11 +15,17 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long id;
+
+    @NotBlank(message = "User Name cant Be empty.")
+    @Size(min = 5, max = 15,message = "User Name should be between 5-15 Characters")
     private  String name;
     @Column(unique = true)
+    @Pattern(regexp = "^[a-zA-Z0-9.]+@kishore.(com, in, org)$")
     private  String email;
     private  String password;
+
     private  String role;
+
     private  boolean enabled;
 
     private  String imgUrl;

@@ -7,12 +7,14 @@ import com.contact.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -41,7 +43,8 @@ public class MainController {
     }
 
     @PostMapping("/register")
-    public  String registerHandler(@ModelAttribute User user, @RequestParam(value = "agreement", defaultValue = "false") boolean agreement, Model m, HttpSession session){
+    public  String registerHandler(@Valid  @ModelAttribute User user, @RequestParam(value = "agreement", defaultValue = "false") boolean agreement, Model m, HttpSession session, BindingResult result){
+
 
 
 
@@ -54,6 +57,11 @@ public class MainController {
             if(!agreement){
                 System.out.println("Agree For Terms and Conditions First Then You Can Submit.");
                 throw  new Exception("Agree For Terms and Conditions");
+            }
+
+            if(result.hasErrors()){
+                m.addAttribute("user", user);
+                return "signup";
             }
 
             User res = this.userRepository.save(user);

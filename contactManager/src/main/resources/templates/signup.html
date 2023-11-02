@@ -25,7 +25,10 @@
                                    name="name"
                                    aria-describedby="name"
                                    th:value="${user.name}"
-                                   placeholder="Enter Here" required>
+                                   th:classappend="${#fields.hasErrors('name')} ?'is-invalid':'' "
+                                   th:text
+                                   placeholder="Enter Here" >
+                            <div th:each="e : ${#fields.errors('name')}" th:text="${e}" id="validationFeedBack" class="invalid-feedback"></div>
                         </div>
                         <div class="form-group">
                             <label for="email">Email address</label>
@@ -34,7 +37,10 @@
                                    name="email"
                                    aria-describedby="email"
                                    th:value="${user.email}"
-                                   placeholder="Enter email" required>
+                                   th:classappend="${#fields.hasErrors('email')} ?'is-invalid':'' "
+                                   placeholder="Enter email" >
+                            <div th:each="e : ${#fields.errors('email')}" th:text="${e}" id="validationFeedBack1" class="invalid-feedback"></div>
+
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>
