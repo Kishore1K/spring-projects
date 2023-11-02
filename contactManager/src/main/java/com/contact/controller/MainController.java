@@ -23,8 +23,13 @@ public class MainController {
     @GetMapping("/about")
     public  String about(Model m){
         m.addAttribute("title", "About - Contact manager ");
-        System.out.println("MainController.home");
         return "about";
+    }
+
+    @GetMapping("/signup")
+    public  String signUp(Model m){
+        m.addAttribute("title", "Register - Contact manager ");
+        return "signup";
     }
 
 
