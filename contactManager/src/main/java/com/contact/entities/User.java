@@ -23,8 +23,8 @@ public class User {
     @Pattern(regexp = "^[a-zA-Z0-9.]+@kishore.com$", message = "user@kishore.com")
     private  String email;
 
-    @Size(min=7, max = 15, message = "should be between 7-15 Charters")
-    @Pattern(regexp = "(?=^.{7,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$", message = "Password Should Contain  1 capital , Number Digit and #,$,@ are the Special Charters allowed ")
+//    @Size(min=7, max = 15, message = "should be between 7-15 Charters")
+//    @Pattern(regexp = "(?=^.{7,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$", message = "Password Should Contain  1 capital , Number Digit and #,$,@ are the Special Charters allowed ")
     private  String password;
 
     private  String role;

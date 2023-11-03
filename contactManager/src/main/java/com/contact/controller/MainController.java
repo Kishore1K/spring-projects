@@ -5,6 +5,7 @@ import com.contact.entities.User;
 import com.contact.helper.Message;
 import com.contact.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,6 +23,8 @@ public class MainController {
 
     @Autowired
     private  UserRepository userRepository;
+    @Autowired
+    private  BCryptPasswordEncoder passwordEncoder;
     @GetMapping("/")
     public  String home(Model m){
         m.addAttribute("title", "Home - Contact manager");
@@ -62,7 +65,7 @@ public class MainController {
                 m.addAttribute("user", user);
                 return "signup";
             }
-
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
             User res = this.userRepository.save(user);
             m.addAttribute("user", new User());
             session.setAttribute("message", new Message("Successfully Registered", "alert-success"));
