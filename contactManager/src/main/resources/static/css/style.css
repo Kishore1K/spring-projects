@@ -40,6 +40,21 @@ body{
 }
 
 /*sidebar*/
+@media only screen and (max-width: 600px){
+
+    .sidebar{
+        display: none;
+        width: 80% !important;
+        background: white;
+        height: 100vh;
+        position: fixed;
+        padding-top: 45px;
+    }
+    .content{
+        margin-left: 0% !important;
+    }
+}
+
 
 .sidebar{
     width: 18%;
@@ -54,20 +69,29 @@ body{
     width: 100%;
     padding: 10px 25px;
     text-decoration: none;
-    color: rgb(128, 128, 128);
+    color: grey;
 }
 
 .sidebar a:hover{
-    background: white;
+    background: #e2e2e2;
 }
-.sidebar .divder{
+.sidebar .divider{
     height: .5px;
-    width: 100px;
-    background: white;
+    width: 100%;
+    background: #e2e2e2;
     margin-top: 10px;
 
 }
 .content{
     margin-left: 20%;
+
+}
+
+.crossBtn{
+    position: absolute;
+    top: 0;
+    right: 35px;
+    font-size: 36px;
+    cursor: pointer;
 
 }
