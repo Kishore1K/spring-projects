@@ -38,7 +38,19 @@
     </div>
   </nav>
 </div>
-<div th:replace="${content}"></div>
+<div class="sidebar">
+  <a href="#" class="item">Home</a>
+  <a href="#" class="item">Contacts</a>
+  <a href="#" class="item">Add Contact</a>
+  <a href="#" class="item">Profile</a>
+  <a href="#" class="item">Settings</a>
+
+
+
+</div>
+<div class="content">
+  <div th:replace="${content}"></div>
+</div>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
