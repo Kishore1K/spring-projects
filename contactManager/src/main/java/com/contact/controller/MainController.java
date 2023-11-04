@@ -86,6 +86,12 @@ public class MainController {
 
     }
 
+    @GetMapping("/login")
+    public  String login(Model m){
+        m.addAttribute("title", "Login - Contact manager");
+        return "login";
+    }
+
 
 
 
