@@ -48,12 +48,30 @@ public class MyConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/admin/**").hasRole("ADMIN_ROLE")
-                .antMatchers("/user/**").hasRole("USER_ROLE")
+                .antMatchers("/user/**").hasAnyAuthority("USER_ROLE")
+                .antMatchers("/admin/**").hasAnyAuthority("ADMIN_ROLE")
+                .antMatchers("/**").permitAll()
                 .antMatchers("/login", "/signup").permitAll()
-                .and().formLogin().loginPage("/login")
+                .antMatchers("/logout").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/login")
                 .loginProcessingUrl("/loginProcess")
                 .defaultSuccessUrl("/user/index")
-                .and().csrf().disable();
+                .and()
+                .csrf().disable();
+
+
+
+
+
+//                .antMatchers("/admin/**").hasRole("ADMIN_ROLE")
+//                .antMatchers("/user/**").hasRole("USER_ROLE")
+//                .antMatchers("/login", "/signup").permitAll()
+//                .and().formLogin().loginPage("/login")
+//                .loginProcessingUrl("/loginProcess")
+//                .defaultSuccessUrl("/user/index")
+//                .and().csrf().disable();
     }
 }

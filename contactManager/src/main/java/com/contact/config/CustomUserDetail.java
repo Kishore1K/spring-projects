@@ -1,6 +1,7 @@
 package com.contact.config;
 
 import com.contact.entities.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,6 +11,7 @@ import java.util.List;
 
 public class CustomUserDetail implements UserDetails {
 
+    @Autowired
     private User user;
 
     public CustomUserDetail(User user) {
@@ -20,6 +22,7 @@ public class CustomUserDetail implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(user.getRole());
+        System.out.println(simpleGrantedAuthority);
         return List.of(simpleGrantedAuthority);
     }
 
@@ -27,6 +30,7 @@ public class CustomUserDetail implements UserDetails {
     public String getPassword() {
         return user.getPassword();
     }
+
 
     @Override
     public String getUsername() {
