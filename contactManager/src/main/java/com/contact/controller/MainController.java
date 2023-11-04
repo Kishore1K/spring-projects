@@ -51,7 +51,7 @@ public class MainController {
 
 
 
-        user.setRole("ROLE_USER");
+        user.setRole("USER_ROLE");
         user.setEnabled(true);
         user.setImgUrl("default.png");
         System.out.println("user = " + user);
