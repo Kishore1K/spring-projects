@@ -21,6 +21,7 @@ public class UserService {
 
     public void saveContact(Contact contact, Principal principal) {
         User user = getUserName(principal.getName());
+        contact.setUser(user);
         user.getContacts().add(contact);
         userRepository.save(user);
         System.out.println("Added to DB");
