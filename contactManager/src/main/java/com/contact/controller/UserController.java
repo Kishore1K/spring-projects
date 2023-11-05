@@ -39,7 +39,12 @@ public class UserController {
         m.addAttribute("title", "Add Contact - Contact Manager");
         m.addAttribute("contact", new Contact());
         return "normal/add_contact";
+    }
 
+    @PostMapping("/process_addContact")
+    public String addContactHandler(@RequestBody Contact contact){
+//        userService.saveContact(contact);
+        return  "";
     }
 
 

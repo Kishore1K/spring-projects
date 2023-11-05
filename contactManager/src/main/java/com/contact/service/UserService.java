@@ -1,5 +1,6 @@
 package com.contact.service;
 
+import com.contact.entities.Contact;
 import com.contact.entities.User;
 import com.contact.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,4 +16,8 @@ public class UserService {
         return  userRepository.getUserByUserName(name);
 
     }
+
+//    public void saveContact(Contact contact) {
+//        userRepository.save(contact);
+//    }
 }
