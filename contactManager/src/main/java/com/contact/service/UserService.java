@@ -6,6 +6,8 @@ import com.contact.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
+
 @Service
 public class UserService {
 
@@ -17,7 +19,10 @@ public class UserService {
 
     }
 
-//    public void saveContact(Contact contact) {
-//        userRepository.save(contact);
-//    }
+    public void saveContact(Contact contact, Principal principal) {
+        User user = getUserName(principal.getName());
+        user.getContacts().add(contact);
+        userRepository.save(user);
+        System.out.println("Added to DB");
+    }
 }

@@ -42,9 +42,11 @@ public class UserController {
     }
 
     @PostMapping("/process_addContact")
-    public String addContactHandler(@RequestBody Contact contact){
-//        userService.saveContact(contact);
-        return  "";
+    public String addContactHandler(@ModelAttribute Contact contact, Principal principal){
+        userService.saveContact(contact, principal);
+        System.out.println("process");
+        System.out.println(contact);
+        return  "normal/add_contact";
     }
 
 
