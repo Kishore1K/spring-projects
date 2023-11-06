@@ -11,7 +11,7 @@
             <div class="card mr-3">
                 <div class="card-body">
                     <h1 class="text-center">Your Contacts</h1>
-                    <table class="table table-bordered table-dark">
+                    <table class="table table-bordered table-hover">
                         <thead>
                         <tr>
                             <th scope="col">Id</th>
@@ -28,7 +28,11 @@
                             <td th:text="${c.name}"></td>
                             <td th:text="${c.email}"></td>
                             <td th:text="${c.phone}"></td>
-                            <td><a href="">More</a> </td>
+                            <td>
+                                <button class="btn btn-primary btn-sm">Update</button>
+                                <button class="btn btn-danger btn-sm">Delete</button>
+
+                            </td>
                         </tr>
                         </tbody>
                     </table>
