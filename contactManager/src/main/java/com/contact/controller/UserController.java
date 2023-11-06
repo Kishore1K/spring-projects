@@ -78,4 +78,11 @@ public class UserController {
     }
 
 
+    @GetMapping("/contacts")
+    public  String showContact(Model m){
+        m.addAttribute("title", "Contacts - Smart Contact ");
+        return "normal/show_contacts";
+
+    }
+
 }
