@@ -2,6 +2,7 @@ package com.contact.controller;
 
 import com.contact.entities.Contact;
 import com.contact.entities.User;
+import com.contact.helper.Message;
 import com.contact.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -51,16 +53,20 @@ public class UserController {
     }
 
     @PostMapping("/process_addContact")
-    public String addContactHandler(@ModelAttribute Contact contact, @RequestParam("imageProcess") MultipartFile file, Principal principal){
+    public String addContactHandler(@ModelAttribute Contact contact, @RequestParam("imageProcess") MultipartFile file, Principal principal, HttpSession session){
         try{
             if(file.isEmpty()){
                 System.out.println("File is empty");
+                session.setAttribute("message", new Message("File is empty", "danger"));
 
             }else{
 
                 String image= userService.ProcessImage(file);
                 if(!Objects.equals(image, "")){
                     userService.saveContact(contact, principal, image);
+                    session.setAttribute("message", new Message("contact Saved Successfully", "success"));
+                }else{
+                    session.setAttribute("message", new Message("contact not saved", "danger"));
                 }
             }
 
