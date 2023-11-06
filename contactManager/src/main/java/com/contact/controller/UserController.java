@@ -19,7 +19,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.security.Principal;
+import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 
 @Controller
@@ -79,8 +81,10 @@ public class UserController {
 
 
     @GetMapping("/contacts")
-    public  String showContact(Model m){
+    public  String showContact(Model m, Principal principal){
         m.addAttribute("title", "Contacts - Smart Contact ");
+        List<Contact> contactList = userService.getContacts(principal.getName());
+        m.addAttribute("contact", contactList);
         return "normal/show_contacts";
 
     }

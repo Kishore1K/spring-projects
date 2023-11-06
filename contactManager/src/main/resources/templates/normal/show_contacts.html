@@ -6,7 +6,35 @@
 </head>
 <body>
     <section>
-        <h1>This is Show Contacts</h1>
+
+        <div class="container">
+            <div class="card mr-3">
+                <div class="card-body">
+                    <h1 class="text-center">Your Contacts</h1>
+                    <table class="table table-bordered table-dark">
+                        <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Phone</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="c, i :${contact} ">
+
+                            <th scope="row" th:text="${ i.count }"></th>
+                            <td th:text="${c.name}"></td>
+                            <td th:text="${c.email}"></td>
+                            <td th:text="${c.phone}"></td>
+                            <td><a href="">More</a> </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </section>
 
 </body>

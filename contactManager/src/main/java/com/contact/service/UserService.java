@@ -2,9 +2,11 @@ package com.contact.service;
 
 import com.contact.entities.Contact;
 import com.contact.entities.User;
+import com.contact.repository.ContactRepository;
 import com.contact.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,6 +16,8 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.security.Principal;
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -21,6 +25,9 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private ContactRepository contactRepository;
 
     public User getUserName(String name) {
         return  userRepository.getUserByUserName(name);
@@ -68,5 +75,11 @@ public class UserService {
             System.out.println("File with this " + extension + " is not allowed!!");
         }
         return "";
+    }
+
+    public List<Contact> getContacts(String name) {
+        User user = getUserName(name);
+        return contactRepository.getContactDetails(user.getId());
+
     }
 }
