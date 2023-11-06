@@ -6,6 +6,9 @@ import com.contact.helper.Message;
 import com.contact.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -80,11 +83,15 @@ public class UserController {
     }
 
 
-    @GetMapping("/contacts")
-    public  String showContact(Model m, Principal principal){
+    @GetMapping("/contacts/{page}")
+    public  String showContact(@PathVariable("page") Integer page, Model m, Principal principal){
         m.addAttribute("title", "Contacts - Smart Contact ");
-        List<Contact> contactList = userService.getContacts(principal.getName());
+        Pageable pageable=PageRequest.of(page, 5);
+
+        Page<Contact> contactList = userService.getContacts(principal.getName(), pageable);
         m.addAttribute("contact", contactList);
+        m.addAttribute("currentPage",page);
+        m.addAttribute("totalPages", contactList.getTotalPages());
         return "normal/show_contacts";
 
     }

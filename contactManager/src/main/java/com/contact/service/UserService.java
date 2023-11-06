@@ -6,7 +6,8 @@ import com.contact.repository.ContactRepository;
 import com.contact.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,7 +18,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.security.Principal;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -77,9 +77,9 @@ public class UserService {
         return "";
     }
 
-    public List<Contact> getContacts(String name) {
+    public Page<Contact> getContacts(String name, Pageable pageable) {
         User user = getUserName(name);
-        return contactRepository.getContactDetails(user.getId());
+        return contactRepository.getContactDetails(user.getId(), pageable);
 
     }
 }
