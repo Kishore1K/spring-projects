@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.security.Principal;
@@ -38,13 +39,34 @@ public class UserService {
 
     public String ProcessImage(MultipartFile file) throws IOException {
 
-        String name  = file.getOriginalFilename();
-        String randomId = UUID.randomUUID().toString();
-        String fileName= randomId.concat(name.substring(name.lastIndexOf(".")));
         File saveFile = new ClassPathResource("static/imgs").getFile();
-        String filePath = saveFile+File.separator+fileName;
-        Files.copy(file.getInputStream(), Paths.get(filePath));
-        return  fileName;
 
+        String originalFilename = file.getOriginalFilename();
+        String filename = UUID.randomUUID().toString();
+        String extension = originalFilename.substring(originalFilename.lastIndexOf("."));
+        String fileNameWithExtension = filename + extension;
+        String fullPathWithFileName = saveFile +File.separator+ fileNameWithExtension;
+
+
+        if (extension.equalsIgnoreCase(".png") || extension.equalsIgnoreCase(".jpg") || extension.equalsIgnoreCase(".jpeg")) {
+            File folder = new File(String.valueOf(saveFile));
+            if (!folder.exists()) {
+                folder.mkdirs();
+            }
+
+            // Use try-with-resources to ensure the input stream is closed after copying.
+            try (InputStream inputStream = file.getInputStream()) {
+                Files.copy(inputStream, Paths.get(fullPathWithFileName));
+            } catch (IOException e) {
+
+                e.printStackTrace();
+                throw e;
+            }
+
+            return fileNameWithExtension;
+        } else {
+            System.out.println("File with this " + extension + " is not allowed!!");
+        }
+        return "";
     }
 }

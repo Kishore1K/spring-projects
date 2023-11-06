@@ -17,6 +17,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.security.Principal;
+import java.util.Objects;
 
 
 @Controller
@@ -58,8 +59,9 @@ public class UserController {
             }else{
 
                 String image= userService.ProcessImage(file);
-                userService.saveContact(contact, principal, image);
-                System.out.println(contact);
+                if(!Objects.equals(image, "")){
+                    userService.saveContact(contact, principal, image);
+                }
             }
 
         }catch (Exception e){
