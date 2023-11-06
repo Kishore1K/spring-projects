@@ -4,10 +4,18 @@ import com.contact.entities.Contact;
 import com.contact.entities.User;
 import com.contact.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.security.Principal;
 
 
@@ -42,10 +50,22 @@ public class UserController {
     }
 
     @PostMapping("/process_addContact")
-    public String addContactHandler(@ModelAttribute Contact contact, Principal principal){
-        userService.saveContact(contact, principal);
-        System.out.println("process");
-        System.out.println(contact);
+    public String addContactHandler(@ModelAttribute Contact contact, @RequestParam("imageProcess") MultipartFile file, Principal principal){
+        try{
+            if(file.isEmpty()){
+                System.out.println("File is empty");
+
+            }else{
+
+                String image= userService.ProcessImage(file);
+                userService.saveContact(contact, principal, image);
+                System.out.println(contact);
+            }
+
+        }catch (Exception e){
+            throw  new UsernameNotFoundException(e.getMessage());
+        }
+
         return  "normal/add_contact";
     }
 
