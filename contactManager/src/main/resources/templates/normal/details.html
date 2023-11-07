@@ -34,12 +34,14 @@
                             <th scope="row">Work</th>
                             <td><span th:text="${contact.work}"></span></td>
                         </tr>
-                        <tr>
-                            <th scope="row">Description</th>
-                            <td><span th:text="${contact.description}"></span></td>
-                        </tr>
+
                         </tbody>
+
                     </table>
+                    <hr/>
+                    <div class="description">
+                        <p  th:utext="${contact.description}"></p>
+                    </div>
                     <button  class="btn btn-primary btn-sm"><a style="text-decoration:none; color: white" th:href="@{'/user/contact/'+${contact.cId}+'/update'}">Update</a></button>
 
                 </div>
