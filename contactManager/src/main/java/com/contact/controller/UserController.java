@@ -95,5 +95,10 @@ public class UserController {
         return "normal/show_contacts";
 
     }
+    @GetMapping("/contact/{id}")
+    public  String deleteContact(@PathVariable("id") Long id, Model m, Principal principal){
+        userService.deleteContact(id);
+        return "redirect:/user/contacts/0";
+    }
 
 }

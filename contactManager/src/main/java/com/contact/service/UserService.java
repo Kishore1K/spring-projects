@@ -82,4 +82,8 @@ public class UserService {
         return contactRepository.getContactDetails(user.getId(), pageable);
 
     }
+
+    public void deleteContact(Long id) {
+        contactRepository.deleteById(id);
+    }
 }
