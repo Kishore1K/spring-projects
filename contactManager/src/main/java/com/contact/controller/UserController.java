@@ -62,7 +62,7 @@ public class UserController {
         try{
             if(file.isEmpty()){
                 System.out.println("File is empty");
-                session.setAttribute("message", new Message("File is empty", "danger"));
+                contact.setImage("contact.png");
 
             }else{
 
@@ -99,6 +99,11 @@ public class UserController {
     public  String deleteContact(@PathVariable("id") Long id, Model m, Principal principal){
         userService.deleteContact(id);
         return "redirect:/user/contacts/0";
+    }
+
+    @GetMapping("/{id}/contact")
+    public  String updateContact(@PathVariable("id") Long id){
+        return  "normal/details";
     }
 
 }
