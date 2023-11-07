@@ -96,3 +96,10 @@ body{
     cursor: pointer;
 
 }
+
+.my_profile_pic{
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    border-radius: 50%;
+}
