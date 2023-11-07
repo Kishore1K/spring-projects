@@ -86,4 +86,8 @@ public class UserService {
     public void deleteContact(Long id) {
         contactRepository.deleteById(id);
     }
+
+    public Contact getDetails(Long id) {
+        return  contactRepository.getContact(id);
+    }
 }

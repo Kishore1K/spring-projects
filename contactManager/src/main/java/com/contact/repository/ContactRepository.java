@@ -12,4 +12,7 @@ import java.util.List;
 public interface ContactRepository extends JpaRepository<Contact, Long> {
     @Query("from Contact as c where c.user.id =:id")
     public  Page<Contact> getContactDetails(@PathVariable("id") Long id, Pageable pageable);
+
+    @Query("from Contact  as c where c.cId=:id")
+    Contact getContact(@PathVariable("id") Long id);
 }

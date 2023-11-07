@@ -102,7 +102,9 @@ public class UserController {
     }
 
     @GetMapping("/{id}/contact")
-    public  String updateContact(@PathVariable("id") Long id){
+    public  String updateContact(@PathVariable("id") Long id, Model m){
+        Contact contact = userService.getDetails(id);
+        m.addAttribute("contact",contact );
         return  "normal/details";
     }
 
