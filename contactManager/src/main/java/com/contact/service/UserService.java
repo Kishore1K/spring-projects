@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,7 +18,7 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.security.Principal;
-import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @Service
@@ -87,7 +88,12 @@ public class UserService {
         contactRepository.deleteById(id);
     }
 
-    public Contact getDetails(Long id) {
-        return  contactRepository.getContact(id);
+    public Contact getDetails(Long id, String name) {
+        User user = userRepository.getUserByUserName(name);
+        Contact contact = contactRepository.getReferenceById(id);
+        if(Objects.equals(user.getId(), contact.getUser().getId())){
+            return contact;
+        }
+        return null;
     }
 }

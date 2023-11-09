@@ -5,7 +5,6 @@ import com.contact.entities.User;
 import com.contact.helper.Message;
 import com.contact.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -16,15 +15,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
-import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.security.Principal;
-import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 
 @Controller
@@ -102,15 +94,19 @@ public class UserController {
     }
 
     @GetMapping("/{id}/contact")
-    public  String viewContact(@PathVariable("id") Long id, Model m){
-        Contact contact = userService.getDetails(id);
-        m.addAttribute("contact",contact );
+    public  String viewContact(@PathVariable("id") Long id, Model m, Principal principal){
+        Contact contact = userService.getDetails(id, principal.getName());
+        if(contact != null)
+            m.addAttribute("contact",contact );
+        else
+            return "redirect:/user/contacts/0";
+
         return  "normal/details";
     }
 
     @GetMapping("/contact/{id}/update")
-    public String updateContact(@PathVariable("id") Long id, Model m){
-        Contact contact = userService.getDetails(id);
+    public String updateContact(@PathVariable("id") Long id, Model m, Principal principal){
+        Contact contact = userService.getDetails(id, principal.getName());
         m.addAttribute("contact", contact);
         return "normal/update_contact";
     }
