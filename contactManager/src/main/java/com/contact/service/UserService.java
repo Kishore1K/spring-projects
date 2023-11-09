@@ -105,4 +105,15 @@ public class UserService {
         }
         return null;
     }
+
+    public void updateContact(Contact contact, Principal principal, String image) {
+        if(!isVerfied(contact.getcId(),principal.getName())){
+            return;
+        }
+        User user = getUserName(principal.getName());
+        contact.setImage(image);
+        contact.setUser(user);
+        user.getContacts().add(contact);
+        contactRepository.save(contact);
+    }
 }

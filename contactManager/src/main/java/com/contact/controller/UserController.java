@@ -88,7 +88,7 @@ public class UserController {
 
     }
     @GetMapping("/contact/{id}")
-    public  String deleteContact(@PathVariable("id") Long id, Model m, Principal principal, HttpSession session){
+    public  String deleteContact(@PathVariable("id") Long id, Principal principal, HttpSession session){
         if(userService.deleteContact(id, principal.getName()))
             session.setAttribute("message", new Message("Contact Deleted Successfully...", "success"));
         return "redirect:/user/contacts/0";
@@ -110,8 +110,28 @@ public class UserController {
     @GetMapping("/contact/{id}/update")
     public String updateContact(@PathVariable("id") Long id, Model m, Principal principal){
         Contact contact = userService.getDetails(id, principal.getName());
+        m.addAttribute("title", "Update - Contact Manager");
         m.addAttribute("contact", contact);
         return "normal/update_contact";
+    }
+
+    @PostMapping("/updateContact")
+    public  String processUpdate(@ModelAttribute Contact contact, @RequestParam("imageProcess") MultipartFile file, Principal principal, HttpSession session){
+        try{
+            String image= userService.ProcessImage(file);
+            if(!Objects.equals(image, "")){
+                userService.updateContact(contact, principal, image);
+                session.setAttribute("message", new Message("contact Updated Successfully", "success"));
+            }else{
+                session.setAttribute("message", new Message("contact not Updated", "danger"));
+            }
+
+
+
+        }catch (Exception e){
+            throw  new UsernameNotFoundException(e.getMessage());
+        }
+        return "redirect:/user/"+contact.getcId()+"/contact";
     }
 
 }
