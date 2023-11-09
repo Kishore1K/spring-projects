@@ -19,7 +19,7 @@
                             </div>
                             <div class="form-group  mt-3 text-center">
                                 <div class="custom-file">
-                                    <input type="file" name="imageProcess" th:value="${contact.image}" placeholder="Enter Image Here">
+                                    <input type="file" name="imageProcess" th:value="'/imgs/'+${contact.image}" placeholder="Enter Image Here">
                                 </div>
                             </div>
                             <div class="input-group">

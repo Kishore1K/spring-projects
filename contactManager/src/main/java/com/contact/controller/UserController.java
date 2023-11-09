@@ -117,17 +117,26 @@ public class UserController {
 
     @PostMapping("/updateContact")
     public  String processUpdate(@ModelAttribute Contact contact, @RequestParam("imageProcess") MultipartFile file, Principal principal, HttpSession session){
+        System.out.println(file.getOriginalFilename());
+
         try{
-            String image= userService.ProcessImage(file);
+            String image=null;
+            if(file.isEmpty()){
+                image = userService.getPrevDetails(contact.getcId());
+            }else{
+                image=userService.ProcessImage(file);
+            }
+            System.out.println(image);
             if(!Objects.equals(image, "")){
+                System.out.println("Updating");
                 userService.updateContact(contact, principal, image);
+                System.out.println("updated");
+
                 session.setAttribute("message", new Message("contact Updated Successfully", "success"));
+
             }else{
                 session.setAttribute("message", new Message("contact not Updated", "danger"));
             }
-
-
-
         }catch (Exception e){
             throw  new UsernameNotFoundException(e.getMessage());
         }

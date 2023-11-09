@@ -107,13 +107,20 @@ public class UserService {
     }
 
     public void updateContact(Contact contact, Principal principal, String image) {
+        System.out.println(isVerfied(contact.getcId(),principal.getName()));
+
         if(!isVerfied(contact.getcId(),principal.getName())){
-            return;
+            System.out.println("Not Updated");
+        }else {
+            User user = getUserName(principal.getName());
+            contact.setImage(image);
+            contact.setUser(user);
+            contactRepository.save(contact);
         }
-        User user = getUserName(principal.getName());
-        contact.setImage(image);
-        contact.setUser(user);
-        user.getContacts().add(contact);
-        contactRepository.save(contact);
+    }
+
+    public String getPrevDetails(Long id) {
+        Contact contact = contactRepository.getContact(id);
+        return contact.getImage();
     }
 }
