@@ -98,8 +98,7 @@ public class UserController {
         Contact contact = userService.getDetails(id, principal.getName());
         if(contact != null)
             m.addAttribute("contact",contact );
-        else
-            return "redirect:/user/contacts/0";
+
 
         return  "normal/details";
     }
