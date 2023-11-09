@@ -55,9 +55,7 @@ public class UserController {
             if(file.isEmpty()){
                 System.out.println("File is empty");
                 contact.setImage("contact.png");
-
-            }else{
-
+            }else {
                 String image= userService.ProcessImage(file);
                 if(!Objects.equals(image, "")){
                     userService.saveContact(contact, principal, image);
@@ -66,6 +64,8 @@ public class UserController {
                     session.setAttribute("message", new Message("contact not saved", "danger"));
                 }
             }
+
+
 
         }catch (Exception e){
             throw  new UsernameNotFoundException(e.getMessage());
@@ -88,9 +88,11 @@ public class UserController {
 
     }
     @GetMapping("/contact/{id}")
-    public  String deleteContact(@PathVariable("id") Long id, Model m, Principal principal){
-        userService.deleteContact(id);
+    public  String deleteContact(@PathVariable("id") Long id, Model m, Principal principal, HttpSession session){
+        if(userService.deleteContact(id, principal.getName()))
+            session.setAttribute("message", new Message("Contact Deleted Successfully...", "success"));
         return "redirect:/user/contacts/0";
+
     }
 
     @GetMapping("/{id}/contact")

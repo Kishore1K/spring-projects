@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -84,8 +83,18 @@ public class UserService {
 
     }
 
-    public void deleteContact(Long id) {
-        contactRepository.deleteById(id);
+    public  boolean isVerfied(Long id, String name){
+        Contact contact = contactRepository.getReferenceById(id);
+        User user = userRepository.getUserByUserName(name);
+        return Objects.equals(user.getId(), contact.getUser().getId());
+    }
+    public boolean deleteContact(Long id, String name) {
+       if(!isVerfied(id, name)){
+           return false;
+       }
+       contactRepository.deleteById(id);
+       return true;
+
     }
 
     public Contact getDetails(Long id, String name) {
