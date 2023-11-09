@@ -45,8 +45,8 @@
                     <button  class="btn btn-primary btn-sm btn-block mt-5"><a style="text-decoration:none; color: white" th:href="@{'/user/contact/'+${contact.cId}+'/update'}">Update</a></button>
                 </div>
             </div>
-            <div th:unless="${contact}" class="container text-center">
-                <p>Sorry You Have No Permission To access this Link</p>
+            <div  th:unless="${contact}" class="container text-center bg-danger ">
+                <h2 class="mt-4">Sorry You Have No Permission To access this Link</h2>
 
             </div>
         </div>

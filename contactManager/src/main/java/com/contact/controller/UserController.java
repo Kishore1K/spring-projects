@@ -97,7 +97,9 @@ public class UserController {
     public  String viewContact(@PathVariable("id") Long id, Model m, Principal principal){
         Contact contact = userService.getDetails(id, principal.getName());
         if(contact != null)
-            m.addAttribute("contact",contact );
+            m.addAttribute("title", contact.getName());
+
+        m.addAttribute("contact",contact );
 
 
         return  "normal/details";

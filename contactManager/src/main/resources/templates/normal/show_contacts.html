@@ -32,8 +32,8 @@
                             <td th:text="${c.email}"></td>
                             <td th:text="${c.phone}"></td>
                             <td>
-                                <button class="btn btn-primary btn-sm"><a  style="text-decoration: none; color: white" th:href="@{'/user/'+${c.cId}+'/contact'}">More</a></button>
-                                <button class="btn btn-danger btn-sm"><a style="text-decoration: none; color: white" th:href="@{'/user/contact/'+${c.cId}}">Delete</a></button>
+                                <a  style="text-decoration: none; color: white" th:href="@{'/user/'+${c.cId}+'/contact'}"><button class="btn btn-primary btn-sm">More</button></a>
+                                <a style="text-decoration: none; color: white" th:href="@{'/user/contact/'+${c.cId}}"><button class="btn btn-danger btn-sm">Delete</button></a>
 
                             </td>
                         </tr>
