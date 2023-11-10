@@ -95,7 +95,7 @@ public class UserService {
            return false;
        }
        Contact contact = contactRepository.getContact(id);
-       deleteImage(contact.getcId());
+       deleteImage(contact.getImage());
        contactRepository.deleteById(id);
        return true;
 
@@ -127,12 +127,11 @@ public class UserService {
         return contact.getImage();
     }
 
-    public boolean deleteImage(Long id) throws IOException {
-        Contact contact = contactRepository.getContact(id);
+    public boolean deleteImage(String url) throws IOException {
         File saveFile = new ClassPathResource("static/imgs").getFile();
         Path fileLoc=null;
         if(contact.getImage()!=null)
-            fileLoc = Path.of(saveFile + File.separator + contact.getImage());
+            fileLoc = Path.of(saveFile + File.separator + url);
         else
             return true;
         return  Files.deleteIfExists(fileLoc);

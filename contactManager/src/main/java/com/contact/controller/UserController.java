@@ -117,7 +117,7 @@ public class UserController {
             if(file.isEmpty()){
                 image = userService.getPrevDetails(contact.getcId());
             }else{
-                if(userService.deleteImage(contact.getcId())){
+                if(userService.deleteImage(contact.getImage())){
                     image=userService.ProcessImage(file);
                 }else{
                     System.out.println("Image Not deleted");
@@ -125,9 +125,7 @@ public class UserController {
             }
             System.out.println(image);
             if(!Objects.equals(image, "")){
-                System.out.println("Updating");
                 userService.updateContact(contact, principal, image);
-                System.out.println("updated");
                 session.setAttribute("message", new Message("contact Updated Successfully", "success"));
             }else{
                 session.setAttribute("message", new Message("contact not Updated", "danger"));
@@ -157,9 +155,14 @@ public class UserController {
             if(file.isEmpty()){
                 image = userService.getPrevDetails1(user.getId());
             }else{
-                image=userService.ProcessImage(file);
+                if(userService.deleteImage(user.getImgUrl())){
+                    image=userService.ProcessImage(file);
+                }else{
+                    System.out.println("Image Not deleted");
+                }
             }
-            if(image.isEmpty()){
+
+            if(image!=null){
                 image="contact.png";
             }
 
