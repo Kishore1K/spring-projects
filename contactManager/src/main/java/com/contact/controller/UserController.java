@@ -139,4 +139,10 @@ public class UserController {
         return "redirect:/user/"+contact.getcId()+"/contact";
     }
 
+
+    @GetMapping("/profile")
+    public String profile(){
+        return "normal/profile";
+    }
+
 }
