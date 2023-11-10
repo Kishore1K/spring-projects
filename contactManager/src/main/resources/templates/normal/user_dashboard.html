@@ -6,11 +6,19 @@
 </head>
 <body>
 <section>
-    <h1>This is Dashboard</h1>
-    <h1>User Name : <span th:text="${user.name}"></span></h1>
-    <h1>User Email : <span th:text="${user.email}"></span></h1>
-    <h1>About : <span th:text="${user.about}"></span></h1>
-    <h1><a href="/logout" th:href="@{/logout}">Logout</a> </h1>
+  <div class="container">
+      <div class="card">
+          <div class="card-body">
+              <div class="container text-center">
+                  <img class="img-fluid my_profile_pic" style="width: 260px; height:260px" th:src="@{/imgs/cm1.png}" alt="" srcset="">
+              </div>
+              <h1 class="text-center mt-5 text-secondary font-italic">Start Adding Your Contacts</h1>
+              <div class="container text-center mt-4">
+                  <a th:href="@{/user/add_contact}" class="btn btn-primary btn-block  text-upper">Add New Contact</a>
+              </div>
+          </div>
+      </div>
+  </div>
 
 
 </section>
