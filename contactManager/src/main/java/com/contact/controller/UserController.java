@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.security.Principal;
 import java.util.Objects;
 
@@ -83,14 +84,12 @@ public class UserController {
         m.addAttribute("currentPage",page);
         m.addAttribute("totalPages", contactList.getTotalPages());
         return "normal/show_contacts";
-
     }
     @GetMapping("/contact/{id}")
-    public  String deleteContact(@PathVariable("id") Long id, Principal principal, HttpSession session){
+    public  String deleteContact(@PathVariable("id") Long id, Principal principal, HttpSession session) throws IOException {
         if(userService.deleteContact(id, principal.getName()))
             session.setAttribute("message", new Message("Contact Deleted Successfully...", "success"));
         return "redirect:/user/contacts/0";
-
     }
 
     @GetMapping("/{id}/contact")
@@ -98,10 +97,7 @@ public class UserController {
         Contact contact = userService.getDetails(id, principal.getName());
         if(contact != null)
             m.addAttribute("title", contact.getName());
-
         m.addAttribute("contact",contact );
-
-
         return  "normal/details";
     }
 
@@ -122,16 +118,18 @@ public class UserController {
             if(file.isEmpty()){
                 image = userService.getPrevDetails(contact.getcId());
             }else{
-                image=userService.ProcessImage(file);
+                if(userService.deleteImage(contact.getcId())){
+                    image=userService.ProcessImage(file);
+                }else{
+                    System.out.println("Image Not deleted");
+                }
             }
             System.out.println(image);
             if(!Objects.equals(image, "")){
                 System.out.println("Updating");
                 userService.updateContact(contact, principal, image);
                 System.out.println("updated");
-
                 session.setAttribute("message", new Message("contact Updated Successfully", "success"));
-
             }else{
                 session.setAttribute("message", new Message("contact not Updated", "danger"));
             }

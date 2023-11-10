@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.Principal;
 import java.util.Objects;
@@ -76,6 +77,8 @@ public class UserService {
         return "";
     }
 
+
+
     public Page<Contact> getContacts(String name, Pageable pageable) {
         User user = getUserName(name);
         return contactRepository.getContactDetails(user.getId(), pageable);
@@ -87,10 +90,12 @@ public class UserService {
         User user = userRepository.getUserByUserName(name);
         return Objects.equals(user.getId(), contact.getUser().getId());
     }
-    public boolean deleteContact(Long id, String name) {
+    public boolean deleteContact(Long id, String name) throws IOException {
        if(!isVerfied(id, name)){
            return false;
        }
+       Contact contact = contactRepository.getContact(id);
+       deleteImage(contact.getcId());
        contactRepository.deleteById(id);
        return true;
 
@@ -107,7 +112,6 @@ public class UserService {
 
     public void updateContact(Contact contact, Principal principal, String image) {
         System.out.println(isVerfied(contact.getcId(),principal.getName()));
-
         if(!isVerfied(contact.getcId(),principal.getName())){
             System.out.println("Not Updated");
         }else {
@@ -121,5 +125,16 @@ public class UserService {
     public String getPrevDetails(Long id) {
         Contact contact = contactRepository.getContact(id);
         return contact.getImage();
+    }
+
+    public boolean deleteImage(Long id) throws IOException {
+        Contact contact = contactRepository.getContact(id);
+        File saveFile = new ClassPathResource("static/imgs").getFile();
+        Path fileLoc=null;
+        if(contact.getImage()!=null)
+            fileLoc = Path.of(saveFile + File.separator + contact.getImage());
+        else
+            return true;
+        return  Files.deleteIfExists(fileLoc);
     }
 }
