@@ -47,7 +47,6 @@ public class UserService {
     public String ProcessImage(MultipartFile file) throws IOException {
 
         File saveFile = new ClassPathResource("static/imgs").getFile();
-
         String originalFilename = file.getOriginalFilename();
         String filename = UUID.randomUUID().toString();
         String extension = originalFilename.substring(originalFilename.lastIndexOf("."));

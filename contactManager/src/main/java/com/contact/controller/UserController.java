@@ -51,22 +51,20 @@ public class UserController {
 
     @PostMapping("/process_addContact")
     public String addContactHandler(@ModelAttribute Contact contact, @RequestParam("imageProcess") MultipartFile file, Principal principal, HttpSession session){
+        String image=null;
         try{
             if(file.isEmpty()){
                 System.out.println("File is empty");
-                contact.setImage("contact.png");
+                image = "contact.png";
             }else {
-                String image= userService.ProcessImage(file);
-                if(!Objects.equals(image, "")){
-                    userService.saveContact(contact, principal, image);
-                    session.setAttribute("message", new Message("contact Saved Successfully", "success"));
-                }else{
-                    session.setAttribute("message", new Message("contact not saved", "danger"));
-                }
+                image = userService.ProcessImage(file);
             }
-
-
-
+            if(!Objects.equals(image, "")){
+                userService.saveContact(contact, principal, image);
+                session.setAttribute("message", new Message("contact Saved Successfully", "success"));
+            }else{
+                session.setAttribute("message", new Message("contact not saved", "danger"));
+            }
         }catch (Exception e){
             throw  new UsernameNotFoundException(e.getMessage());
         }
