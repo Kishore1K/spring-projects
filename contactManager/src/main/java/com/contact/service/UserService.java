@@ -137,4 +137,15 @@ public class UserService {
             return true;
         return  Files.deleteIfExists(fileLoc);
     }
+
+    public void updateProfile(User user, String image) {
+        user.setImgUrl(image);
+        userRepository.save(user);
+
+    }
+
+    public String getPrevDetails1(Long id) {
+        User user = userRepository.getReferenceById(id);
+        return  user.getImgUrl();
+    }
 }

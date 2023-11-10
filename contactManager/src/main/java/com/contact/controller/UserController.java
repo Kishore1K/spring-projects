@@ -139,15 +139,41 @@ public class UserController {
     }
 
 
-    @GetMapping("/profile/update")
+    @GetMapping("/profile")
     public String profile(Model m){
         m.addAttribute("title", "Profile - Smart Contact ");
         return "normal/profile";
     }
-
-    @GetMapping
-    public String updateProfile(@ModelAttribute User user, Model m, Principal principal){
+    @GetMapping("/profile/update")
+    public  String updateProfile(Model m, Principal principal){
+        m.addAttribute("title", principal.getName());
         return  "normal/update_profile";
+
     }
+    @PostMapping("/profile/update")
+    public String updateProfileProcess(@ModelAttribute User user, Model m, @RequestParam("imageProcess") MultipartFile file,HttpSession session){
+        try{
+            String image=null;
+            if(file.isEmpty()){
+                image = userService.getPrevDetails1(user.getId());
+            }else{
+                image=userService.ProcessImage(file);
+            }
+            if(image.isEmpty()){
+                image="contact.png";
+            }
+
+            if(!Objects.equals(image, "")){
+                userService.updateProfile(user, image);
+                session.setAttribute("message", new Message("User Details Updated Successfully", "success"));
+            }else{
+                session.setAttribute("message", new Message("User Details not Updated", "danger"));
+            }
+        }catch (Exception e){
+            throw  new UsernameNotFoundException(e.getMessage());
+        }
+        return  "redirect:/user/profile";
+    }
+
 
 }
