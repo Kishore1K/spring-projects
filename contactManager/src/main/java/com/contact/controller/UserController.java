@@ -112,7 +112,6 @@ public class UserController {
     @PostMapping("/updateContact")
     public  String processUpdate(@ModelAttribute Contact contact, @RequestParam("imageProcess") MultipartFile file, Principal principal, HttpSession session){
         System.out.println(file.getOriginalFilename());
-
         try{
             String image=null;
             if(file.isEmpty()){
@@ -140,9 +139,15 @@ public class UserController {
     }
 
 
-    @GetMapping("/profile")
-    public String profile(){
+    @GetMapping("/profile/update")
+    public String profile(Model m){
+        m.addAttribute("title", "Profile - Smart Contact ");
         return "normal/profile";
+    }
+
+    @GetMapping
+    public String updateProfile(@ModelAttribute User user, Model m, Principal principal){
+        return  "normal/update_profile";
     }
 
 }
