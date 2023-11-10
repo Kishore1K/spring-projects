@@ -161,11 +161,7 @@ public class UserController {
                     System.out.println("Image Not deleted");
                 }
             }
-
-            if(image!=null){
-                image="contact.png";
-            }
-
+            System.out.println(image);
             if(!Objects.equals(image, "")){
                 userService.updateProfile(user, image);
                 session.setAttribute("message", new Message("User Details Updated Successfully", "success"));

@@ -130,10 +130,15 @@ public class UserService {
     public boolean deleteImage(String url) throws IOException {
         File saveFile = new ClassPathResource("static/imgs").getFile();
         Path fileLoc=null;
-        if(contact.getImage()!=null)
+        if(url==null)
+            return  true;
+        else{
+            if(url.equals("contact.png")){
+                return true;
+            }
             fileLoc = Path.of(saveFile + File.separator + url);
-        else
-            return true;
+        }
+
         return  Files.deleteIfExists(fileLoc);
     }
 
