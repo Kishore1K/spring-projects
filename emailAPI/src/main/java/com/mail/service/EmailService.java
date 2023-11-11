@@ -32,7 +32,8 @@ public class EmailService {
 
         Session session = Session.getInstance(properties, new Authenticator(){
             protected PasswordAuthentication getPasswordAuthentication(){
-                return  new PasswordAuthentication("test@gmail.com", "*************");
+                return  new PasswordAuthentication(
+                        "*****************@gmail.com", "***************");
             }
         });
         session.setDebug(true);
