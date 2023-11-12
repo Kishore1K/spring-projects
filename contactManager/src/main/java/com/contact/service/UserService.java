@@ -5,6 +5,7 @@ import com.contact.entities.User;
 import com.contact.repository.ContactRepository;
 import com.contact.repository.UserRepository;
 import org.apache.tomcat.util.http.fileupload.FileItem;
+import org.apache.tomcat.util.http.fileupload.disk.DiskFileItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Page;
@@ -14,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -49,23 +51,12 @@ public class UserService {
 
     public String ProcessImage(MultipartFile file) throws IOException {
         String originalFilename=null, filename=null,extension=null,fileNameWithExtension=null,fullPathWithFileName=null;
-
         File saveFile = new ClassPathResource("static/imgs").getFile();
-        if(file.isEmpty()){
-            MultipartFile newfile = (MultipartFile) new File("static/imgs/contact.png");
-            originalFilename = newfile.getName();
-            filename = UUID.randomUUID().toString();
-            extension = originalFilename.substring(originalFilename.lastIndexOf("."));
-            fileNameWithExtension = filename + extension;
-            fullPathWithFileName = saveFile +File.separator+ fileNameWithExtension;
-
-        }else{
-            originalFilename = file.getOriginalFilename();
-            filename = UUID.randomUUID().toString();
-            extension = originalFilename.substring(originalFilename.lastIndexOf("."));
-            fileNameWithExtension = filename + extension;
-            fullPathWithFileName = saveFile +File.separator+ fileNameWithExtension;
-        }
+        originalFilename = file.getOriginalFilename();
+        filename = UUID.randomUUID().toString();
+        extension = originalFilename.substring(originalFilename.lastIndexOf("."));
+        fileNameWithExtension = filename + extension;
+        fullPathWithFileName = saveFile +File.separator+ fileNameWithExtension;
         System.out.println(originalFilename);
         if (extension.equalsIgnoreCase(".png") || extension.equalsIgnoreCase(".jpg") || extension.equalsIgnoreCase(".jpeg")) {
             File folder = new File(String.valueOf(saveFile));
