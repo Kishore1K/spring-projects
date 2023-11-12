@@ -8,6 +8,7 @@ const toggleSideBar =()=>{
     }
 };
 
+// search bar
 const  search =()=>{
     let query = $("#search-input").val();
     console.log(query);
@@ -20,15 +21,12 @@ const  search =()=>{
             return res.json();
         }).then((data)=>{
 
-               let txt = `<div class='list-group' >`
+               let txt = `<div class='list-group'>`
                 for (let datum of data) {
                     for (const datumElement of datum) {
                         txt+=`<a href="/user/${datumElement.cId}/contact" class="list-group-item list-group-item-action">${datumElement.name}</a>`
                     }
-
                 }
-
-
                 txt+=`</div>`;
                 $(".search-result").html(txt).show();
             });
