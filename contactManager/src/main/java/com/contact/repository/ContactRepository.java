@@ -1,6 +1,7 @@
 package com.contact.repository;
 
 import com.contact.entities.Contact;
+import com.contact.entities.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -17,6 +18,6 @@ public interface ContactRepository extends JpaRepository<Contact, Long> {
     Contact getContact(@PathVariable("id") Long id);
 
 
-    @Query(value ="select  * from CONTACT where name LIKE=:name" , nativeQuery = true)
-    List<Contact> searchContactByName(@PathVariable("name") String name);
+
+    List<Contact> findByNameContainingAndUser(String name, User user);
 }

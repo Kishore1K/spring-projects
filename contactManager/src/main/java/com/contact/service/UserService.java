@@ -158,6 +158,8 @@ public class UserService {
     }
 
     public List<Contact> searchContact(String query, Principal principal) {
-        contactRepository.searchContactByName(query)
+        User user = userRepository.getUserByUserName(principal.getName());
+
+        return   contactRepository.findByNameContainingAndUser(query, user);
     }
 }
