@@ -18,12 +18,18 @@ const  search =()=>{
         let url = `http://localhost:8080/search/${query}`
         fetch(url).then((res)=>{
             return res.json();
-        })
-            .then((data)=>{
+        }).then((data)=>{
+                console.log(data);
+
                let txt = `<div class='list-group' >`
-                data.forEach((contact)=>{
-                    txt+=`<a href="#" class="list-group-item list-group-action">${contact.name}</a>`
-                });
+                for (let datum of data) {
+                    for (const datumElement of datum) {
+                        txt+=`<a href="#" class="list-group-item list-group-action">${datumElement.name}</a>`
+                    }
+
+                }
+
+
                 txt+=`</div>`;
                 $(".search-result").html(txt).show();
             });
