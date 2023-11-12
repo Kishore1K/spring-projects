@@ -19,12 +19,11 @@ const  search =()=>{
         fetch(url).then((res)=>{
             return res.json();
         }).then((data)=>{
-                console.log(data);
 
                let txt = `<div class='list-group' >`
                 for (let datum of data) {
                     for (const datumElement of datum) {
-                        txt+=`<a href="#" class="list-group-item list-group-action">${datumElement.name}</a>`
+                        txt+=`<a href="/user/${datumElement.cId}/contact" class="list-group-item list-group-action">${datumElement.name}</a>`
                     }
 
                 }
