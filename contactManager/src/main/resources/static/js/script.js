@@ -23,7 +23,7 @@ const  search =()=>{
                let txt = `<div class='list-group' >`
                 for (let datum of data) {
                     for (const datumElement of datum) {
-                        txt+=`<a href="/user/${datumElement.cId}/contact" class="list-group-item list-group-action">${datumElement.name}</a>`
+                        txt+=`<a href="/user/${datumElement.cId}/contact" class="list-group-item list-group-item-action">${datumElement.name}</a>`
                     }
 
                 }
