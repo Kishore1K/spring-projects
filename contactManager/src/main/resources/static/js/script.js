@@ -20,8 +20,13 @@ const  search =()=>{
             return res.json();
         })
             .then((data)=>{
-                console.log(data)
-            })
-        $(".search-result").show();
+               let txt = `<div class='list-group' >`
+                data.forEach((contact)=>{
+                    txt+=`<a href="#" class="list-group-item list-group-action">${contact.name}</a>`
+                });
+                txt+=`</div>`;
+                $(".search-result").html(txt).show();
+            });
+
     }
 }
