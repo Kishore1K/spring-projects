@@ -54,12 +54,13 @@ public class UserController {
     public String addContactHandler(@ModelAttribute Contact contact, @RequestParam("imageProcess") MultipartFile file, Principal principal, HttpSession session){
         String image=null;
         try{
-            if(file.isEmpty()){
-                System.out.println("File is empty");
-                image = "contact.png";
-            }else {
-                image = userService.ProcessImage(file);
-            }
+//            if(file.isEmpty()){
+//                System.out.println("File is empty");
+//                image = "contact.png";
+//            }else {
+            image = userService.ProcessImage(file);
+            System.out.println(image+"name");
+
             if(!Objects.equals(image, "")){
                 userService.saveContact(contact, principal, image);
                 session.setAttribute("message", new Message("contact Saved Successfully", "success"));
