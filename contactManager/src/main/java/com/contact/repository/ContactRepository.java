@@ -15,4 +15,8 @@ public interface ContactRepository extends JpaRepository<Contact, Long> {
 
     @Query("from Contact  as c where c.cId=:id")
     Contact getContact(@PathVariable("id") Long id);
+
+
+    @Query(value ="select  * from CONTACT where name LIKE=:name" , nativeQuery = true)
+    List<Contact> searchContactByName(@PathVariable("name") String name);
 }

@@ -22,6 +22,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.Principal;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -154,5 +155,9 @@ public class UserService {
     public String getPrevDetails1(Long id) {
         User user = userRepository.getReferenceById(id);
         return  user.getImgUrl();
+    }
+
+    public List<Contact> searchContact(String query, Principal principal) {
+        contactRepository.searchContactByName(query)
     }
 }
