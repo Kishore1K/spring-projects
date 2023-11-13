@@ -1,5 +1,7 @@
 package com.tasks.service;
 
+import com.tasks.Exception.TaskNotFound;
+import com.tasks.Exception.UserNotFoundException;
 import com.tasks.entity.Task;
 import com.tasks.entity.User;
 import com.tasks.model.TaskDTO;
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TaskServiceImpl implements TaskService{
@@ -24,7 +27,9 @@ public class TaskServiceImpl implements TaskService{
     private TasksRepository tasksRepository;
     @Override
     public TaskDTO saveTask(Long userId, TaskDTO taskDTO) {
-        User user=userRepository.findById(userId).get();
+        User user=userRepository.findById(userId).orElseThrow(
+                ()->new UserNotFoundException(String.format("User Id %d is Not Found", userId))
+        );
         Task  task = modelMapper.map(taskDTO, Task.class);
         task.setUser(user);
         Task savedTask  = tasksRepository.save(task);
@@ -34,6 +39,12 @@ public class TaskServiceImpl implements TaskService{
 
     @Override
     public List<TaskDTO> getAllTasks(Long userId) {
-        return null;
+        User user = userRepository.findById(userId).orElseThrow(
+                ()->new UserNotFoundException(String.format("User Id %d is Not Found", userId))
+        );
+        List<Task> taskList = tasksRepository.findAllByUserId(userId);
+        return taskList.stream().map(
+                task -> modelMapper.map(task, TaskDTO.class)
+        ).collect(Collectors.toList());
     }
 }

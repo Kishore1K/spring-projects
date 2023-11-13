@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api")
 public class TaskController {
@@ -22,6 +24,10 @@ public class TaskController {
 
     }
 
+    @GetMapping("/{id}/tasks")
+    public ResponseEntity<List<TaskDTO>> getTasks(@PathVariable(name = "id") Long id){
+        return  new ResponseEntity<>(taskService.getAllTasks(id), HttpStatus.OK);
+    }
 
 
 
