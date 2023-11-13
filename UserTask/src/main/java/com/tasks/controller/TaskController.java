@@ -29,6 +29,13 @@ public class TaskController {
         return  new ResponseEntity<>(taskService.getAllTasks(id), HttpStatus.OK);
     }
 
+    @GetMapping("/{userId}/task/{taskId}")
+    public ResponseEntity<TaskDTO> getTask(@PathVariable(name = "userId") Long userId, @PathVariable(name = "taskId") Long taskId){
+        return new ResponseEntity<>(taskService.getTask(userId, taskId), HttpStatus.OK);
+    }
+
+
+
 
 
 }
