@@ -15,7 +15,7 @@ public class TaskController {
     private TaskService taskService;
     @PostMapping("/{id}/tasks")
     public ResponseEntity<TaskDTO> saveTask(
-            @RequestParam("id") Long userId, @RequestBody TaskDTO taskDTO
+            @PathVariable (name = "id") Long userId, @RequestBody TaskDTO taskDTO
     ){
 
         return  new ResponseEntity<>(taskService.saveTask(userId, taskDTO), HttpStatus.CREATED);
