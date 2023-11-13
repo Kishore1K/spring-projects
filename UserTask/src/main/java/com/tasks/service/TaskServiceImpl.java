@@ -4,7 +4,7 @@ import com.tasks.Exception.NotAuthourized;
 import com.tasks.Exception.TaskNotFound;
 import com.tasks.Exception.UserNotFoundException;
 import com.tasks.entity.Task;
-import com.tasks.entity.User;
+import com.tasks.entity.Users;
 import com.tasks.model.TaskDTO;
 import com.tasks.repository.TasksRepository;
 import com.tasks.repository.UserRepository;
@@ -29,7 +29,7 @@ public class TaskServiceImpl implements TaskService{
     private TasksRepository tasksRepository;
     @Override
     public TaskDTO saveTask(Long userId, TaskDTO taskDTO) {
-        User user=userRepository.findById(userId).orElseThrow(
+        Users user=userRepository.findById(userId).orElseThrow(
                 ()->new UserNotFoundException(String.format("User Id %d is Not Found", userId))
         );
         Task  task = modelMapper.map(taskDTO, Task.class);
@@ -41,7 +41,7 @@ public class TaskServiceImpl implements TaskService{
 
     @Override
     public List<TaskDTO> getAllTasks(Long userId) {
-        User user = userRepository.findById(userId).orElseThrow(
+        Users user = userRepository.findById(userId).orElseThrow(
                 ()->new UserNotFoundException(String.format("User Id %d is Not Found", userId))
         );
         List<Task> taskList = tasksRepository.findAllByUserId(userId);
@@ -52,7 +52,7 @@ public class TaskServiceImpl implements TaskService{
 
     @Override
     public TaskDTO getTask(Long userId, Long taskId){
-        User user = userRepository.findById(userId).orElseThrow(
+        Users user = userRepository.findById(userId).orElseThrow(
                 ()->new UserNotFoundException(String.format("User Id %d is Not Found", userId))
         );
         Task task = tasksRepository.findById(taskId).orElseThrow(
@@ -66,7 +66,7 @@ public class TaskServiceImpl implements TaskService{
 
     @Override
     public void deleteTask(Long userId, Long taskId) {
-        User user = userRepository.findById(userId).orElseThrow(
+        Users user = userRepository.findById(userId).orElseThrow(
                 ()->new UserNotFoundException(String.format("User Id %d is Not Found", userId))
         );
         Task task = tasksRepository.findById(taskId).orElseThrow(

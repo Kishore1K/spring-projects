@@ -1,10 +1,15 @@
 package com.tasks.controller;
 
+import com.tasks.entity.LoginDTO;
 import com.tasks.model.UserDTO;
 import com.tasks.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,8 +22,26 @@ public class AuthController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
     @PostMapping("/register")
     public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO){
        return new ResponseEntity<>(userService.createUser(userDTO), HttpStatus.CREATED);
+    }
+
+
+
+    @PostMapping("/login")
+    public ResponseEntity<String> loginUser(@RequestBody LoginDTO loginDTO){
+        System.out.println("Login");
+        Authentication authentication =  authenticationManager
+                .authenticate(
+                        new UsernamePasswordAuthenticationToken(loginDTO.getEmail(), loginDTO.getPassword())
+                );
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        return new ResponseEntity<>("User LoggedIn SuccessFully.", HttpStatus.OK);
+
     }
 }

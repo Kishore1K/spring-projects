@@ -19,9 +19,7 @@ public class TaskController {
     public ResponseEntity<TaskDTO> saveTask(
             @PathVariable (name = "id") Long userId, @RequestBody TaskDTO taskDTO
     ){
-
         return  new ResponseEntity<>(taskService.saveTask(userId, taskDTO), HttpStatus.CREATED);
-
     }
 
     @GetMapping("/{id}/tasks")
