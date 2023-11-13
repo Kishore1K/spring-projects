@@ -63,4 +63,18 @@ public class TaskServiceImpl implements TaskService{
         }
         return modelMapper.map(task, TaskDTO.class);
     }
+
+    @Override
+    public void deleteTask(Long userId, Long taskId) {
+        User user = userRepository.findById(userId).orElseThrow(
+                ()->new UserNotFoundException(String.format("User Id %d is Not Found", userId))
+        );
+        Task task = tasksRepository.findById(taskId).orElseThrow(
+                ()->new TaskNotFound(String.format("Task Id %d is Not Found", taskId))
+        );
+        if(!Objects.equals(task.getUser().getId(), user.getId())){
+            throw new NotAuthourized("Your Not Authorized to Delete");
+        }
+        tasksRepository.delete(task);
+    }
 }

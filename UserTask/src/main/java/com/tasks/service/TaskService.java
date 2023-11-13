@@ -11,6 +11,10 @@ public interface TaskService {
 
     public List<TaskDTO> getAllTasks(Long userId);
 
-    public TaskDTO getTask(Long userId, Long taskId) throws NotAuthourized;
+    public TaskDTO getTask(Long userId, Long taskId);
+
+
+    public void  deleteTask(Long userId, Long taskId);
+
 
 }
