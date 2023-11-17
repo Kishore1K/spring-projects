@@ -11,6 +11,8 @@ import java.util.Date;
 
 @Component
 public class JWTUtils {
+
+    private final String secretKey = "KishoreJWT";
     public String generateToken(Authentication authentication){
         String email = authentication.getName();
         Date curentDate   = new Date();
@@ -20,13 +22,19 @@ public class JWTUtils {
                 .setSubject(email)
                 .setIssuedAt(curentDate)
                 .setExpiration(expiryDate)
-                .signWith(SignatureAlgorithm.HS512, "kishoreSecreteKey").compact();
+                .signWith(SignatureAlgorithm.HS512, secretKey).compact();
 
     }
 
     public String getEmailFromToken(String token){
-        Claims claims = Jwts.parser().setSigningKey("kishoreSecreteKey").parseClaimsJws(token).getBody();
+        Claims claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
 
         return claims.getSubject();
     }
+
+    public boolean isTokenValid(String token){
+            Claims claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
+            return claims.getExpiration().before(new Date());
+    }
+
 }

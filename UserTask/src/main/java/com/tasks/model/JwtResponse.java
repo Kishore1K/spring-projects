@@ -1,4 +1,4 @@
-package com.tasks.entity;
+package com.tasks.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

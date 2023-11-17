@@ -1,7 +1,7 @@
 package com.tasks.controller;
 
-import com.tasks.entity.JwtResponse;
-import com.tasks.entity.LoginDTO;
+import com.tasks.model.JwtResponse;
+import com.tasks.model.LoginDTO;
 import com.tasks.model.UserDTO;
 import com.tasks.security.JWTUtils;
 import com.tasks.service.UserService;
@@ -39,14 +39,13 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<JwtResponse> loginUser(@RequestBody LoginDTO loginDTO){
+        System.out.println("login");
         Authentication authentication = authenticationManager.authenticate(
                         new UsernamePasswordAuthenticationToken(loginDTO.getEmail(), loginDTO.getPassword())
                 );
-
+        System.out.println(authentication);
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = jwtUtils.generateToken(authentication);
-
         return new ResponseEntity<>(new JwtResponse(token), HttpStatus.OK);
-
     }
 }
