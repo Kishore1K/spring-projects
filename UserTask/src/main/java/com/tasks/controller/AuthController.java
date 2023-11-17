@@ -1,7 +1,9 @@
 package com.tasks.controller;
 
+import com.tasks.entity.JwtResponse;
 import com.tasks.entity.LoginDTO;
 import com.tasks.model.UserDTO;
+import com.tasks.security.JWTUtils;
 import com.tasks.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,6 +27,9 @@ public class AuthController {
 
     @Autowired
     private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private JWTUtils jwtUtils;
     @PostMapping("/register")
     public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO){
        return new ResponseEntity<>(userService.createUser(userDTO), HttpStatus.CREATED);
@@ -33,15 +38,15 @@ public class AuthController {
 
 
     @PostMapping("/login")
-    public ResponseEntity<String> loginUser(@RequestBody LoginDTO loginDTO){
-        System.out.println("Login");
-        Authentication authentication =  authenticationManager
-                .authenticate(
+    public ResponseEntity<JwtResponse> loginUser(@RequestBody LoginDTO loginDTO){
+        Authentication authentication = authenticationManager.authenticate(
                         new UsernamePasswordAuthenticationToken(loginDTO.getEmail(), loginDTO.getPassword())
                 );
-        SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        return new ResponseEntity<>("User LoggedIn SuccessFully.", HttpStatus.OK);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        String token = jwtUtils.generateToken(authentication);
+
+        return new ResponseEntity<>(new JwtResponse(token), HttpStatus.OK);
 
     }
 }
