@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="abb8eedf-2f22-45a2-a8e4-0bbdf13a76af" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/examSys/src/main/java/com/exam/api/entity/Exams.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/exam/api/entity/Exams.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/exam/api/entity/Exams.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -59,7 +58,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1700746473448</updated>
-      <workItem from="1700746474198" duration="3328000" />
+      <workItem from="1700746474198" duration="3627000" />
     </task>
     <servers />
   </component>

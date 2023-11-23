@@ -3,7 +3,7 @@ package com.exam.api.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.apache.catalina.User;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -18,10 +18,12 @@ public class Exams {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Value(value="0")
     private Long Score;
 
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     List<Quiz> quizList = new ArrayList<>();
-
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     List<Users> usersList = new ArrayList<>();
 
 }

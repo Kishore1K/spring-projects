@@ -24,6 +24,7 @@ public class Quiz {
 
     private Boolean status;
 
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Users>  usersList = new ArrayList<>();
 
 
