@@ -4,22 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="abb8eedf-2f22-45a2-a8e4-0bbdf13a76af" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../examAPI/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../examAPI/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../examAPI/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../examAPI/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../examAPI/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../examAPI/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../examAPI/src/main/java/com/kishore/exam/ExamApiApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../examAPI/src/main/java/com/kishore/exam/entity/Student.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../examAPI/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../examAPI/src/test/java/com/kishore/exam/ExamApiApplicationTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HELP.md" beforeDir="false" afterPath="$PROJECT_DIR$/HELP.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/exam/api/ExamSysApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/exam/api/ExamSysApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/exam/api/ExamSysApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/exam/api/ExamSysApplicationTests.java" afterDir="false" />
-    </list>
+    <list default="true" id="abb8eedf-2f22-45a2-a8e4-0bbdf13a76af" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -38,10 +23,20 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "<unknown>",
+    "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RunManager">
+    <configuration name="ExamSysApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="examSys" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.exam.api.ExamSysApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -50,8 +45,11 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1700746473448</updated>
-      <workItem from="1700746474198" duration="8000" />
+      <workItem from="1700746474198" duration="314000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
 </project>
