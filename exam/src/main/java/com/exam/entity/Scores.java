@@ -12,10 +12,19 @@ public class Scores {
 
     private Integer score;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Users users;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Exams exams;
 
+    @Override
+    public String toString() {
+        return "Scores{" +
+                "id=" + id +
+                ", score=" + score +
+                ", users=" + users +
+                ", exams=" + exams +
+                '}';
+    }
 }

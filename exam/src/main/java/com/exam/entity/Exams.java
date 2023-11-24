@@ -20,4 +20,14 @@ public class Exams {
     private boolean status;
     @ManyToOne(cascade = CascadeType.ALL)
     private Users user;
+
+    @Override
+    public String toString() {
+        return "Exams{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", status=" + status +
+                ", user=" + user +
+                '}';
+    }
 }

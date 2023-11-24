@@ -30,5 +30,16 @@ public class Users {
 
     private String password;
 
-
+    @Override
+    public String toString() {
+        return "Users{" +
+                "id=" + id +
+                ", uid='" + uid + '\'' +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", dept='" + dept + '\'' +
+                ", dob=" + dob +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }

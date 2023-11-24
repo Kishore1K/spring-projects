@@ -27,4 +27,17 @@ public class Questions {
     @OneToMany(cascade = CascadeType.ALL)
     private List<Exams> exams;
 
+    @Override
+    public String toString() {
+        return "Questions{" +
+                "id=" + id +
+                ", question='" + question + '\'' +
+                ", option1='" + option1 + '\'' +
+                ", option2='" + option2 + '\'' +
+                ", option3='" + option3 + '\'' +
+                ", option4='" + option4 + '\'' +
+                ", op_ans=" + op_ans +
+                ", exams=" + exams +
+                '}';
+    }
 }
