@@ -1,5 +1,6 @@
 package com.exam.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,8 +27,9 @@ public class Users {
 
     private  String dept;
 
-    private Date dob;
+    private String dob;
 
+    @JsonIgnore
     private String password;
 
     @Override
