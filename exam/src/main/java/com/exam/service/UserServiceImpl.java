@@ -1,8 +1,10 @@
 package com.exam.service;
 
 import com.exam.entity.Exams;
+import com.exam.entity.Questions;
 import com.exam.entity.Users;
 import com.exam.repository.ExamsRepo;
+import com.exam.repository.QuestionsRepo;
 import com.exam.repository.UsersRepos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,9 @@ public class UserServiceImpl implements UserService{
 
     @Autowired
     private ExamsRepo examsRepo;
+
+    @Autowired
+    private QuestionsRepo questionsRepo;
 
     public String idGenerator(Users users){
 
@@ -39,6 +44,16 @@ public class UserServiceImpl implements UserService{
     @Override
     public Users getUsers(String user) {
         return usersRepos.findByUid(user);
+    }
+
+    @Override
+    public Exams getExams(Long examId) {
+        return examsRepo.findById(examId).get();
+    }
+
+    @Override
+    public Questions saveQuestions(Questions questions) {
+        return questionsRepo.save(questions);
     }
 
 
