@@ -56,17 +56,20 @@ public class MainController {
 
     }
 
+    @PostMapping("/student")
     public ResponseEntity<Students> saveStudents(@RequestBody Students students){
         return  new ResponseEntity<>(userService.saveStudents(students), HttpStatus.CREATED);
     }
 
     @PostMapping("/exams")
     public ResponseEntity<Scores> assignExam(@RequestBody AssignDTO assignDTO){
+
         Students students  = userService.getStudent(assignDTO.getEmail());
         Exams exams = userService.getExams(assignDTO.getExamId());
         Scores scores = new Scores();
         scores.setExams(exams);
         scores.setStudents(students);
+        System.out.println(scores);
         return  new ResponseEntity<>(userService.assignExam(scores), HttpStatus.CREATED);
     }
 
