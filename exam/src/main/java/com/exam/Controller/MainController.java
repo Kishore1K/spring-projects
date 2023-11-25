@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -48,7 +51,8 @@ public class MainController {
     public ResponseEntity<Questions> saveQuestions(@RequestBody QuestionsDTO questionsDTO){
         Exams exams = userService.getExams(questionsDTO.getExamId());
         Questions questions = modelMapper.map(questionsDTO, Questions.class);
-        questions.getExams().add(exams);
+        questions.setExams(exams);
+        System.out.println(questions);
         return new ResponseEntity<>(userService.saveQuestions(questions), HttpStatus.CREATED);
 
     }

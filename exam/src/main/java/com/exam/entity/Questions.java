@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -24,8 +25,8 @@ public class Questions {
     private String option4;
     private int op_ans;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Exams> exams;
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Exams exams;
 
     @Override
     public String toString() {

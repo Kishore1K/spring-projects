@@ -16,4 +16,6 @@ public class QuestionsDTO {
     private int op_ans;
 
     private Long examId;
+
+
 }
