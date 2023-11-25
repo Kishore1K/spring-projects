@@ -1,9 +1,6 @@
 package com.exam.service;
 
-import com.exam.entity.Exams;
-import com.exam.entity.Questions;
-import com.exam.entity.Users;
-import org.springframework.stereotype.Service;
+import com.exam.entity.*;
 
 public interface UserService {
 
@@ -16,4 +13,10 @@ public interface UserService {
     Exams getExams(Long examId);
 
     Questions saveQuestions(Questions questions);
+
+    Students getStudent(String email);
+
+    Scores assignExam(Scores scores);
+
+    Students saveStudents(Students students);
 }

@@ -1,8 +1,7 @@
 package com.exam.Controller;
 
-import com.exam.entity.Exams;
-import com.exam.entity.Questions;
-import com.exam.entity.Users;
+import com.exam.entity.*;
+import com.exam.model.AssignDTO;
 import com.exam.model.ExamRegister;
 import com.exam.model.QuestionsDTO;
 import com.exam.service.UserService;
@@ -55,6 +54,20 @@ public class MainController {
         System.out.println(questions);
         return new ResponseEntity<>(userService.saveQuestions(questions), HttpStatus.CREATED);
 
+    }
+
+    public ResponseEntity<Students> saveStudents(@RequestBody Students students){
+        return  new ResponseEntity<>(userService.saveStudents(students), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/exams")
+    public ResponseEntity<Scores> assignExam(@RequestBody AssignDTO assignDTO){
+        Students students  = userService.getStudent(assignDTO.getEmail());
+        Exams exams = userService.getExams(assignDTO.getExamId());
+        Scores scores = new Scores();
+        scores.setExams(exams);
+        scores.setStudents(students);
+        return  new ResponseEntity<>(userService.assignExam(scores), HttpStatus.CREATED);
     }
 
 

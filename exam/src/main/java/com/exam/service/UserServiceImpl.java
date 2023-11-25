@@ -1,11 +1,7 @@
 package com.exam.service;
 
-import com.exam.entity.Exams;
-import com.exam.entity.Questions;
-import com.exam.entity.Users;
-import com.exam.repository.ExamsRepo;
-import com.exam.repository.QuestionsRepo;
-import com.exam.repository.UsersRepos;
+import com.exam.entity.*;
+import com.exam.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +16,10 @@ public class UserServiceImpl implements UserService{
 
     @Autowired
     private QuestionsRepo questionsRepo;
+    @Autowired
+    private StudentRepo studentRepo;
+    @Autowired
+    private ScoresRepo scoresRepo;
 
     public String idGenerator(Users users){
 
@@ -54,6 +54,21 @@ public class UserServiceImpl implements UserService{
     @Override
     public Questions saveQuestions(Questions questions) {
         return questionsRepo.save(questions);
+    }
+
+    @Override
+    public Students getStudent(String email) {
+        return studentRepo.findByEmail(email);
+    }
+
+    @Override
+    public Scores assignExam(Scores scores) {
+        return scoresRepo.save(scores);
+    }
+
+    @Override
+    public Students saveStudents(Students students) {
+        return studentRepo.save(students);
     }
 
 
