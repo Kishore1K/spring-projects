@@ -1,5 +1,6 @@
 package com.exam.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,9 +19,11 @@ public class Scores {
     private Integer score;
 
     @ManyToOne(cascade = CascadeType.ALL)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Students students;
 
     @ManyToOne(cascade = CascadeType.ALL)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Exams exams;
 
     @Override

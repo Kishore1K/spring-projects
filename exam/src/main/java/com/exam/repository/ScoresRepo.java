@@ -15,8 +15,11 @@ public interface ScoresRepo extends JpaRepository<Scores, Long> {
     @Query(" from  Scores  s where s.exams =:exams and s.students=:students")
     Optional<Scores> findByExamsAndStudents(@Param("exams") Exams exams, @Param("students") Students students);
 
-    @Query(value = "select  distinct  *  from Scores where s.exams_id = ?1 and s.students_id = ?2", nativeQuery = true)
+    @Query(value = "SELECT * from scores s where s.exams_id = ?1 and s.students_id = ?2", nativeQuery = true)
     Scores getScores(Long id, Long id1);
+
+    @Query(value = "UPDATE  Scores s set  s.score =:score where s.exams =:id and  s.students=:id1", nativeQuery = true)
+    void updateScore(Integer score, Long id, Long id1);
 
 //    @Query("update  Scores s set  s.score =:marks where s.exams=:eId and s.students=:sId")
 //    Scores updateScore(@Param("score") Integer marks, @Param("eId") Long eId , @Param("sId") Long sId);
