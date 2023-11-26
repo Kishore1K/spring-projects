@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -20,6 +21,9 @@ public interface ScoresRepo extends JpaRepository<Scores, Long> {
 
     @Query(value = "UPDATE  Scores s set  s.score =:score where s.exams =:id and  s.students=:id1", nativeQuery = true)
     void updateScore(Integer score, Long id, Long id1);
+
+
+    List<Scores> findByStudents(Students students);
 
 //    @Query("update  Scores s set  s.score =:marks where s.exams=:eId and s.students=:sId")
 //    Scores updateScore(@Param("score") Integer marks, @Param("eId") Long eId , @Param("sId") Long sId);

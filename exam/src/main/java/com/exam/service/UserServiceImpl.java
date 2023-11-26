@@ -77,12 +77,8 @@ public class UserServiceImpl implements UserService{
     public Scores updateMarks(UpdateMarksDTO marksDTO) {
         Students students = studentRepo.findByEmail(marksDTO.getEmail());
         Exams exams = examsRepo.getReferenceById(marksDTO.getExamId());
-
-//        Scores scores = scoresRepo.getScores(exams.getId(), students.getId());
         Scores scores = scoresRepo.findByExamsAndStudents(exams, students).get();
         scores.setScore(marksDTO.getScore());
-//        scoresRepo.updateScore(marksDTO.getScore(), exams.getId(), students.getId());
-        System.out.println(marksDTO);
         return  scoresRepo.save(scores);
     }
 
