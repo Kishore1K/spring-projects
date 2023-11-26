@@ -1,6 +1,7 @@
 package com.exam.service;
 
 import com.exam.entity.*;
+import com.exam.model.UpdateMarksDTO;
 
 public interface UserService {
 
@@ -19,4 +20,6 @@ public interface UserService {
     Scores assignExam(Scores scores);
 
     Students saveStudents(Students students);
+
+    Scores updateMarks(UpdateMarksDTO marksDTO);
 }

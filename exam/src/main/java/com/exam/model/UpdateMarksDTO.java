@@ -2,13 +2,13 @@ package com.exam.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AssignDTO {
-    private Long examId;
-    private String email;
-
+public class UpdateMarksDTO extends AssignDTO{
+    private Integer score;
 }

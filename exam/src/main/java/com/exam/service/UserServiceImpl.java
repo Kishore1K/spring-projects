@@ -1,10 +1,12 @@
 package com.exam.service;
 
 import com.exam.entity.*;
+import com.exam.model.UpdateMarksDTO;
 import com.exam.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
 import java.util.Random;
 @Service
 public class UserServiceImpl implements UserService{
@@ -69,6 +71,15 @@ public class UserServiceImpl implements UserService{
     @Override
     public Students saveStudents(Students students) {
         return studentRepo.save(students);
+    }
+
+    @Override
+    public Scores updateMarks(UpdateMarksDTO marksDTO) {
+        Students students = studentRepo.findByEmail(marksDTO.getEmail());
+        Exams exams = examsRepo.getReferenceById(marksDTO.getExamId());
+        Scores scores = scoresRepo.getScores(exams.getId(), students.getId());
+        scores.setScore(marksDTO.getScore());
+        return  scores;
     }
 
 
