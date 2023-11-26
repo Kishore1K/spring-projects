@@ -1,5 +1,6 @@
 package com.exam.Controller;
 
+import com.exam.entity.Questions;
 import com.exam.entity.Scores;
 import com.exam.service.StudentService;
 import com.exam.service.StudentServiceImpl;
@@ -18,8 +19,12 @@ public class StudentController {
     private StudentService studentService;
     @PostMapping("/exams")
     public ResponseEntity<List<Scores>> getExams(@RequestParam String email){
-        System.out.println("Exams");
-        System.out.println(email);
         return new ResponseEntity<>(studentService.findDetails(email), HttpStatus.OK);
+    }
+
+    @PostMapping("/quiz")
+    public ResponseEntity<List<Questions>> getQuestions(@RequestParam("id") Long examId){
+        return new ResponseEntity<>(studentService.getQuestions(examId), HttpStatus.OK);
+
     }
 }
