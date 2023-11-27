@@ -22,4 +22,6 @@ public interface UserService {
     Students saveStudents(Students students);
 
     Scores updateMarks(UpdateMarksDTO marksDTO);
+
+    Exams updateStatus(Long user, Boolean status);
 }

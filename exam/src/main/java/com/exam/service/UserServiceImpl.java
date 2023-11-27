@@ -6,7 +6,6 @@ import com.exam.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Map;
 import java.util.Random;
 @Service
 public class UserServiceImpl implements UserService{
@@ -80,6 +79,14 @@ public class UserServiceImpl implements UserService{
         Scores scores = scoresRepo.findByExamsAndStudents(exams, students).get();
         scores.setScore(marksDTO.getScore());
         return  scoresRepo.save(scores);
+    }
+
+    @Override
+    public Exams updateStatus(Long examId, Boolean status) {
+        Exams exams =examsRepo.getReferenceById(examId);
+        exams.setStatus(status);
+        return  examsRepo.save(exams);
+
     }
 
 

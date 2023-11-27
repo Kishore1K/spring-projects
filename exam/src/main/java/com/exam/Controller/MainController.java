@@ -76,6 +76,9 @@ public class MainController {
         return  new ResponseEntity<>(userService.updateMarks(marksDTO), HttpStatus.ACCEPTED);
     }
 
+    public ResponseEntity<Exams> updateStatus(@RequestParam Boolean status, @RequestParam Long examId){
+        return  new ResponseEntity<>(userService.updateStatus(examId, status), HttpStatus.OK);
+    }
 
 
 }
